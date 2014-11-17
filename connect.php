@@ -1,8 +1,12 @@
-	<?php
-		$host="localhost";
-		$user="deepanshu__sapra";
-		$password="b13116";
-		$db="B13116";
-		$connect=mysql_connect($host,$user,$password) or die(mysql_error());
-		mysql_select_db($db,$connect);
-	?>
+<?php
+
+	$conn = mysqli_connect("localhost","root","root","craigslist");
+	// Check connection
+	if (mysqli_connect_errno())
+  	{
+  		echo "Failed to connect to MySQL: " . mysqli_connect_error();
+  	}
+  	else{
+  		echo "Connected to mysql server.";
+  	}
+?>
