@@ -16,7 +16,7 @@
 	require 'connect.php';
 		//encrypt password using sha
 	
-	if(isset($_POST['fname'])&&($_POST['password']==$_POST['repassword'])&&isset($_POST['lname'])&&isset($_POST['username'])&&isset($_POST['password'])&&isset($_POST['phone'])&&isset($_POST['gender'])&&isset($_POST['email']))
+	if(isset($_POST['fname'])&&($_POST['password']==$_POST['password'])&&isset($_POST['lname'])&&isset($_POST['username'])&&isset($_POST['password'])&&isset($_POST['phone'])&&isset($_POST['gender'])&&isset($_POST['email']))
 	{
 		$fname=$_POST['fname'];
 		$lname=$_POST['lname'];
@@ -34,15 +34,16 @@
 			$num=mysql_num_rows($result);
 			if($num>0)
 			{ 
-				echo "User exists with same username and/or email address. Please select another username or use a different email address";
+				
 				header('Location: signup.php');
+				echo "User exists with same username and/or email address. Please select another username or use a different email address";
 			}
 
 			//insert user into database
 			else
 				if($num==0) 
 			{ 
-				$sql="INSERT INTO users values('$fname','$lname','$username','$hashed_password',,'$email','$contactno','$gender')";
+				$sql="INSERT INTO users (fname,lname,sex,username,emailid,contactno,password) values('$fname','$lname','$gender','$username','$email','$contactno','$hashed_password')";
 				mysql_query($sql);
 	    		header('Location: index.html');
 			}
@@ -58,7 +59,7 @@
          			 <p class="contact"><label for="name"></label></p> 
           			<input id="lname" name="lname" placeholder="Last name" required="" tabindex="2" type="text"> 
     				<p class="contact"><label for="email">Email</label></p> 
-    				<input id="email" name="email" placeholder="example@domain.com" required="" type="email" tabindex="3"> 
+    				<input id="email" name="email" placeholder="example@domain.com" required="" tabindex="3" type="email"> 
         	        <p class="contact"><label for="username">Create a username</label></p> 
     				<input id="username" name="username" placeholder="username" required="" tabindex="4" type="text"> 
         	        <p class="contact"><label for="password">Create a password</label></p> 
